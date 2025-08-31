@@ -62,11 +62,11 @@ function generateSlug(filename: string): string {
 
 // Get all markdown files dynamically from content directory
 function getMarkdownFiles(): Record<string, () => Promise<any>> {
-  // Try multiple possible locations for markdown files
-  const files = {
-    ...import.meta.glob('/src/content/*.md', { as: 'raw', eager: false }),
-    ...import.meta.glob('/src/content/news/*.md', { as: 'raw', eager: false })
-  };
+  // Import all markdown files from content directory
+  const files = import.meta.glob('/src/content/*.md', { as: 'raw', eager: false });
+  
+  console.log('Found markdown files:', Object.keys(files));
+  
   return files;
 }
 
